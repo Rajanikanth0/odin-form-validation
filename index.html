@@ -8,6 +8,44 @@
   <script src="logic/index.js" defer></script>
 </head>
 <body>
-  
+  <div class="container">
+    <form novalidate>
+      <input
+      type="email"
+      name="email"
+      id="email"
+      required
+      pattern=""
+      placeholder="exmaple@email.com">
+
+      <select name="country" id="country">
+        <option value="space">Space</option>
+        <option value="ground">Ground</option>
+        <option value="water">Water</option>
+      </select>
+
+      <input
+      type="text"
+      name="p-code"
+      id="p-code"
+      pattern=""
+      placeholder="s-234">
+
+      <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      pattern="">
+
+      <input
+      type="password"
+      name="c-password"
+      id="c-password"
+      required>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
 </body>
 </html>
