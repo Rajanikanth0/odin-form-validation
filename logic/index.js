@@ -13,7 +13,7 @@ function showMessage(message) {
 
 // Validation: Check a single field's validity
 function validateField(event) {
-  const { target } = event;
+  const { target = event } = event;
   const { validity } = target;
 
   let errorMessage = "";
