@@ -10,39 +10,54 @@
 <body>
   <div class="container">
     <form novalidate>
-      <input
-      type="email"
-      name="email"
-      id="email"
-      required
-      pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$";
-      placeholder="exmaple@email.com">
+      <div class="formField">
+        <label for="email">Email:</label>
+        <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$";
+        placeholder="exmaple@email.com">
+      </div>
 
-      <select name="country" id="country">
-        <option value="space">Space</option>
-        <option value="ground">Ground</option>
-        <option value="water">Water</option>
-      </select>
+      <div class="formField">
+        <label for="country">Country:</label>
+        <select name="country" id="country">
+          <option value="space">Space</option>
+          <option value="ground">Ground</option>
+          <option value="water">Water</option>
+        </select>
+      </div>
 
-      <input
-      type="text"
-      name="p-code"
-      id="p-code"
-      pattern=""
-      placeholder="s-234">
+      <div class="formField">
+        <label for="P-code">Postal Code:</label>
+        <input
+        type="text"
+        name="p-code"
+        id="p-code"
+        pattern=""
+        placeholder="s-234">
+      </div>
 
-      <input
-      type="password"
-      name="password"
-      id="password"
-      required
-      pattern="">
+      <div class="formField">
+        <label for="password">Password</label>
+        <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        pattern="">
+      </div>
 
-      <input
-      type="password"
-      name="c-password"
-      id="c-password"
-      required>
+      <div class="formField">
+        <label for="c-password">Confirm Password:</label>
+        <input
+        type="password"
+        name="c-password"
+        id="c-password"
+        required>
+      </div>
 
       <input type="submit" value="Submit">
     </form>

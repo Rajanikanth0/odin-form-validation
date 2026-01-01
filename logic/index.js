@@ -7,8 +7,18 @@ function getFormFields(form) {
 }
 
 // Utility: Display error messages
-function showMessage(message) {
-  console.log(message);
+function showMessage(field, message) {
+  const label = document.querySelector(`[for="${field.id}"]`);
+  if (!label) return;
+
+  let span = label.querySelector(".errorBubble");
+  if (!span) {
+    span = document.createElement("span");
+    span.className = "errorBubble";
+    label.appendChild(span);
+  }
+
+  span.textContent = message;
 }
 
 // Validation: Check a single field's validity
@@ -24,7 +34,7 @@ function validateField(event) {
     errorMessage = "Invalid format.";
   }
 
-  showMessage(errorMessage);
+  showMessage(target, errorMessage);
 }
 
 // Attach listeners to fields
