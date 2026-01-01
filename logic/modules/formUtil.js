@@ -21,4 +21,11 @@ function showMessage(field, message) {
   span.textContent = message;
 }
 
-export { getFormFields, showMessage };
+// Get error message for a field
+function getErrorMessage(validity) {
+  if (validity.valueMissing) return "This field is required.";
+  if (validity.patternMismatch) return "Invalid format.";
+  return "";
+}
+
+export { getFormFields, showMessage, getErrorMessage };

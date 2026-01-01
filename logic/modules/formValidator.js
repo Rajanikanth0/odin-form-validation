@@ -1,29 +1,23 @@
-import { showMessage } from "./formUtil.js";
+import { showMessage, getErrorMessage } from "./formUtil.js";
+
+// Handle postal code enable/disable
+function handleCountryField(value) {
+  const pCode = document.getElementById("p-code");
+  if (pCode) {
+    pCode.disabled = !value;
+  }
+}
 
 // Validate a single field
 function validateField(event) {
   const target = event.target || event;
   const { validity, id, value } = target;
 
-  // Enable/disable postal code based on country selection
-  if (id == "country") {
-    const pCode = document.getElementById("p-code");
-    if (pCode) {
-      pCode.disabled = !value;
-    }
+  if (id === "country") {
+    handleCountryField(value);
   }
   
-  // Determine error message
-  let errorMessage = "";
-  switch (true) {
-    case validity.valueMissing:
-      errorMessage = "This field is required.";
-      break;
-    case validity.patternMismatch:
-      errorMessage = "Invalid format.";
-      break;
-  }
-
+  const errorMessage = getErrorMessage(validity);
   showMessage(target, errorMessage);
 }
 
