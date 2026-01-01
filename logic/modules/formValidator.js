@@ -1,16 +1,27 @@
 import { showMessage } from "./formUtil.js";
 
-// Check a single field's validity
+// Validate a single field
 function validateField(event) {
-  const { target = event } = event;
-  const { validity } = target;
+  const target = event.target || event;
+  const { validity, id, value } = target;
 
+  // Enable/disable postal code based on country selection
+  if (id == "country") {
+    const pCode = document.getElementById("p-code");
+    if (pCode) {
+      pCode.disabled = !value;
+    }
+  }
+  
+  // Determine error message
   let errorMessage = "";
-
-  if (validity.valueMissing) {
-    errorMessage = "This field is required.";
-  } else if (validity.patternMismatch) {
-    errorMessage = "Invalid format.";
+  switch (true) {
+    case validity.valueMissing:
+      errorMessage = "This field is required.";
+      break;
+    case validity.patternMismatch:
+      errorMessage = "Invalid format.";
+      break;
   }
 
   showMessage(target, errorMessage);
