@@ -66,6 +66,18 @@ const FormValidator = (() => {
 // Main Form Validation Initializer
 
 const FormValidationApp = (() => {
+  // Validate Form on submit
+  function handleSubmit(event, fields) {
+    const form = event.target;
+
+    if ( !form.checkValidity() ) {
+      fields.forEach(({ element }) => {
+        FormValidator.validateField(element);
+      });
+      event.preventDefault();
+    }
+  }
+
   // Main initializer
   function init() {
     const form = document.querySelector("form");
@@ -77,20 +89,7 @@ const FormValidationApp = (() => {
     const fields = FormUtils.getFormFields(form);
     FormValidator.addFieldListeners(fields);
 
-    form.addEventListener("submit", (e) => {
-      const form = e.target;
-
-      if (form.checkValidity()) {
-
-      } else {
-        for (const {id, element} of fields) {
-          FormValidator.validateField(element);
-        }
-
-        // form.reportValidity();
-        e.preventDefault();
-      }
-    });
+    form.addEventListener("submit", (e) => handleSubmit(e, fields));
   }
 
   return { init };
