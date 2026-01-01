@@ -31,12 +31,12 @@
       </div>
 
       <div class="formField">
-        <label for="P-code">Postal Code:</label>
+        <label for="p-code">Postal Code:</label>
         <input
         type="text"
         name="p-code"
         id="p-code"
-        pattern=""
+        pattern="^[a-zA-Z]-\w{4}$"
         placeholder="s-234">
       </div>
 
@@ -47,7 +47,7 @@
         name="password"
         id="password"
         required
-        pattern="">
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$">
       </div>
 
       <div class="formField">
