@@ -21,7 +21,7 @@ function handleMessage(field) {
       return "Postal Code must have a single letter before '-'.";
     }
     
-    if (!/^\d$/.test(numbers)) {
+    if (!/^\d{4}$/.test(numbers)) {
       return "Postal Code must have exactly 4 digits after '-'.";
     }
   }
