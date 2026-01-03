@@ -9,7 +9,7 @@ function handleCountryField(value) {
 }
 
 function handleMessage(field) {
-  const value = field.value;
+  const value = field.value.trim();
 
   if (field.id === "p-code") {
     const [char, numbers] = value.split('-');
@@ -39,63 +39,53 @@ function handleMessage(field) {
     }
 
     // Validate username characters
-    const usernameRegex = /^[a-zA-Z0-9._%+\-]+$/;
-    if (!usernameRegex.test(username)) {
+    if (!/^[a-zA-Z0-9._%+\-]+$/.test(username)) {
       return "Username (before @) can only contain letters, numbers, (_, %, +, -).";
     }
 
     // Validate domain structure
-    if (!domainPart.includes(".")) {
+    const parts = domainPart.split(".");
+    if (parts.length < 2) {
       return "Email must contain a dot separating domain and top-level domain.";
     }
 
-    const parts = domainPart.split(".");
     const tld = parts.pop();
     const domain = parts.join(".");
 
     // Validate domain and TLD
-    if (!tld) {
-      return "Email must contain a top-level domain after the final dot.";
-    }
 
-    const domainRegex = /^[a-zA-Z0-9.\-]+$/;
-    if (!domainRegex.test(domain)) {
+    if (!/^[a-zA-Z0-9.\-]+$/.test(domain)) {
       return "Domain (before final dot) can only have letters, numbers, (., -).";
     }
 
-    const tldRegex = /^[a-zA-Z]{2,}$/;
-    if (!tldRegex.test(tld)) {
+    if (!/^[a-zA-Z]{2,}$/.test(tld)) {
       return "Top-level domain (after final dot) must be at least 2 letters.";
     }
   }
 
   if (field.id === "password") {
     // No spaces allowed
-    const noSpaceRegex = /^[^\s]+$/;
-    if (!noSpaceRegex.test(value)) {
+    if (!/^[^\s]+$/.test(value)) {
       return "Password cannot contain spaces.";
     }
 
     // Length check
     if (value.length < 6 || value.length > 12) {
-      return "Password must be between 6 and 12  characters long.";
+      return "Password must be between 6 and 12 characters long.";
     }
 
     // at least one lowercase letter check
-    const lowerCaseRegex = /[a-z]/;
-    if (!lowerCaseRegex.test(value)) {
+    if (!/[a-z]/.test(value)) {
       return "Password must contain at least one lowercase letter.";
     }
 
     // at least one uppercase letter check
-    const upperCaseRegex = /[A-Z]/;
-    if (!upperCaseRegex.test(value)) {
+    if (!/[A-Z]/.test(value)) {
       return "Password must contain at least one uppercase letter.";
     }
 
     // at least one digit check
-    const digitRegex = /\d/;
-    if (!digitRegex.test(value)) {
+    if (!/\d/.test(value)) {
       return "Password must contain at least one digit.";
     }
   }
