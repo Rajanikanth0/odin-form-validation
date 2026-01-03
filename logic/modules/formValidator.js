@@ -11,7 +11,7 @@ function handleCountryField(value) {
 function handleMessage(field) {
   const value = field.value;
 
-  if (field.id == "p-code") {
+  if (field.id === "p-code") {
     const [char, numbers] = value.split('-');
 
     // Validate presence of char and numbers
@@ -30,8 +30,7 @@ function handleMessage(field) {
     }
   }
 
-  if (field.id == "email") {
-    const value = field.value;
+  if (field.id === "email") {
     const [username, domainPart] = value.split('@');
 
     // Validate presence of username and domain
@@ -67,6 +66,37 @@ function handleMessage(field) {
     const tldRegex = /^[a-zA-Z]{2,}$/;
     if (!tldRegex.test(tld)) {
       return "Top-level domain (after final dot) must be at least 2 letters.";
+    }
+  }
+
+  if (field.id === "password") {
+    // No spaces allowed
+    const noSpaceRegex = /^[^\s]+$/;
+    if (!noSpaceRegex.test(value)) {
+      return "Password cannot contain spaces.";
+    }
+
+    // Length check
+    if (value.length < 6 || value.length > 12) {
+      return "Password must be between 6 and 12  characters long.";
+    }
+
+    // at least one lowercase letter check
+    const lowerCaseRegex = /[a-z]/;
+    if (!lowerCaseRegex.test(value)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+
+    // at least one uppercase letter check
+    const upperCaseRegex = /[A-Z]/;
+    if (!upperCaseRegex.test(value)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+
+    // at least one digit check
+    const digitRegex = /\d/;
+    if (!digitRegex.test(value)) {
+      return "Password must contain at least one digit.";
     }
   }
 }
