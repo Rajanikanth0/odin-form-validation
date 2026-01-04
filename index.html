@@ -10,8 +10,8 @@
 <body>
   <div class="container">
     <form novalidate>
-      <div class="formField">
-        <label for="email">Email:</label>
+      <div class="formField emailField">
+        <label for="email">Email</label>
         <input
         type="email"
         name="email"
@@ -21,8 +21,8 @@
         placeholder="exmaple@email.com">
       </div>
 
-      <div class="formField">
-        <label for="country">Country:</label>
+      <div class="formField countryField">
+        <label for="country">Country</label>
         <select name="country" id="country">
           <option value=""></option>
           <option value="space">Space</option>
@@ -31,8 +31,8 @@
         </select>
       </div>
 
-      <div class="formField">
-        <label for="p-code">Postal Code:</label>
+      <div class="formField pCodeField">
+        <label for="p-code">Postal Code</label>
         <input
         type="text"
         name="p-code"
@@ -42,18 +42,19 @@
         disabled>
       </div>
 
-      <div class="formField">
+      <div class="formField passwordField">
         <label for="password">Password</label>
         <input
         type="password"
         name="password"
         id="password"
         required
+        autocomplete="new-password"
         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^ ]{6,12}$">
       </div>
 
-      <div class="formField">
-        <label for="c-password">Confirm Password:</label>
+      <div class="formField cPasswordField">
+        <label for="c-password">Confirm Password</label>
         <input
         type="password"
         name="c-password"
@@ -62,7 +63,9 @@
         disabled>
       </div>
 
-      <input type="submit" value="Submit">
+      <div class="formField submitField">
+        <input type="submit" value="Submit">
+      </div>
     </form>
   </div>
 </body>
