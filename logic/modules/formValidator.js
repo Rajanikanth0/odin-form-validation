@@ -1,30 +1,28 @@
-import { showMessage, FieldErrorMessage } from "./formUtil.js";
+import { showMessage, validators } from "./formUtil.js";
 
 const messengers = {
-  "p-code": FieldErrorMessage.postalCode,
-  "email": FieldErrorMessage.email,
-  "password": FieldErrorMessage.password
+  "p-code": validators.postalCode,
+  "email": validators.email,
+  "password": validators.password
 };
 
+// Enable/disable postal code based on country
 function togglePostalCodeField(isEnabled) {
   const postalCode = document.getElementById("p-code");
-  if (postalCode) {
-    postalCode.disabled = !isEnabled;
-  }
+  if (postalCode) postalCode.disabled = !isEnabled;
 }
 
 function getErrorMessage(field) {
-  const messenger = messengers[field.id];
-  return messenger ? messenger(field.value) : null;
+  const validator = messengers[field.id];
+  return validator ? validator(field.value) : null;
 }
 
 // Validate a single field
 function validateField(event) {
   const target = event.target || event;
-  const { id, value } = target;
 
-  if (id === "country") {
-    togglePostalCodeField( Boolean(value) );
+  if (target.id === "country") {
+    togglePostalCodeField( Boolean(target.value) );
   }
   
   const errorMessage = getErrorMessage(target) || "";

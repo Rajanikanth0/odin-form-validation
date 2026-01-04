@@ -21,8 +21,8 @@ function showMessage(field, message) {
   span.textContent = message;
 }
 
-const FieldErrorMessage = (() => {
-  function postalCode(value) {
+const validators = {
+  postalCode(value) {
     const trimmed = value.trim();
     const [char, numbers] = trimmed.split('-');
 
@@ -30,21 +30,19 @@ const FieldErrorMessage = (() => {
     if (!char || !numbers) {
       return "Postal Code must contain a single dash separating character and digits."
     }
-
     // Validate char structure
     if (!/^[a-zA-Z]$/.test(char)) {
       return "Postal Code must have a single letter before '-'.";
     }
-    
     // Validate number characters
     if (!/^\d{4}$/.test(numbers)) {
       return "Postal Code must have exactly 4 digits after '-'.";
     }
 
     return null; // valid
-  }
+  },
 
-  function email(value) {
+  email(value) {
     const trimmed = value.trim();
     const [username, domainPart] = trimmed.split('@');
 
@@ -52,7 +50,6 @@ const FieldErrorMessage = (() => {
     if (!username || !domainPart) {
       return "Email must contain a single '@' separating username and domain.";
     }
-
     // Validate username characters
     if (!/^[a-zA-Z0-9._%+\-]+$/.test(username)) {
       return "Username (before @) can only contain letters, numbers, (_, %, +, -).";
@@ -72,37 +69,32 @@ const FieldErrorMessage = (() => {
     if (!/^[a-zA-Z0-9.\-]+$/.test(domain)) {
       return "Domain (before final dot) can only have letters, numbers, (., -).";
     }
-
     if (!/^[a-zA-Z]{2,}$/.test(tld)) {
       return "Top-level domain (after final dot) must be at least 2 letters.";
     }
 
     return null; // valid
-  }
+  },
 
-  function password(value) {
+  password(value) {
     const trimmed = value.trim();
 
     // No spaces allowed
-    if (!/^[^\s]+$/.test(trimmed)) {
+    if (/\s/.test(trimmed)) {
       return "Password cannot contain spaces.";
     }
-
     // Length check
     if (trimmed.length < 6 || trimmed.length > 12) {
       return "Password must be between 6 and 12 characters long.";
     }
-
     // at least one lowercase letter check
     if (!/[a-z]/.test(trimmed)) {
       return "Password must contain at least one lowercase letter.";
     }
-
     // at least one uppercase letter check
     if (!/[A-Z]/.test(trimmed)) {
       return "Password must contain at least one uppercase letter.";
     }
-
     // at least one digit check
     if (!/\d/.test(trimmed)) {
       return "Password must contain at least one digit.";
@@ -110,12 +102,6 @@ const FieldErrorMessage = (() => {
 
     return null; // valid
   }
+};
 
-  return {
-    postalCode,
-    email,
-    password
-  };
-})();
-
-export { getFormFields, showMessage, FieldErrorMessage };
+export { getFormFields, showMessage, validators };
