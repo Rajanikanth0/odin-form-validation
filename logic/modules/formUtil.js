@@ -8,14 +8,13 @@ function getFormFields(form) {
 
 // Display error messages
 function showMessage(field, message) {
-  const label = document.querySelector(`[for="${field.id}"]`);
-  if (!label) return;
+  const parentField = field.parentElement;
 
-  let span = label.querySelector(".errorBubble");
+  let span = parentField.querySelector(".errorBubble");
   if (!span) {
     span = document.createElement("span");
     span.className = "errorBubble";
-    label.appendChild(span);
+    parentField.appendChild(span);
   }
 
   span.textContent = message;
