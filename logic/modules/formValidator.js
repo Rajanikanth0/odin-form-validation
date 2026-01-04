@@ -1,14 +1,19 @@
 import { showMessage, validators } from "./formUtil.js";
 
-const messengers = {
+const fieldValidators = {
   "p-code": validators.postalCode,
   "email": validators.email,
   "password": validators.password,
   "c-password": validators.confirmPassword
 };
 
+const fieldDependencies = {
+  "country": "p-code",
+  "password": "c-password"
+};
+
 function getErrorMessage(field) {
-  return messengers[field.id]?.(field.value) ?? null;
+  return fieldValidators[field.id]?.(field.value) ?? null;
 }
 
 // Enable/disable the field
@@ -16,11 +21,6 @@ function toggleField(id, isDisabled) {
   const field = document.getElementById(id);
   if (field) field.disabled = isDisabled;
 }
-
-const fieldDependencies = {
-  country: "p-code",
-  password: "c-password"
-};
 
 // Validate a single field
 function validateField(event) {
