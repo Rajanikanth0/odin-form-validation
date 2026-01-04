@@ -1,5 +1,13 @@
 import { getFormFields } from "./formUtil.js";
-import { validateField, addFieldListeners } from "./formValidator.js";
+import { validateField } from "./formValidator.js";
+
+// Attach listeners to fields
+function addFieldListeners(fields) {
+  fields.forEach(({id, element}) => {
+    const eventType = (id === "country") ? "change" : "input";
+    element.addEventListener(eventType, validateField);
+  });
+}
 
 // Validate Form on submit
 function handleSubmit(event, fields) {

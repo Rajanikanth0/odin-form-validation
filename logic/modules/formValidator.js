@@ -33,12 +33,4 @@ function validateField(event) {
   showMessage(target, errorMessage);
 }
 
-// Attach listeners to fields
-function addFieldListeners(fields) {
-  fields.forEach(({id, element}) => {
-    const eventType = (id === "country") ? "change" : "input";
-    element.addEventListener(eventType, validateField);
-  });
-}
-
-export { validateField, addFieldListeners };
+export { validateField };
