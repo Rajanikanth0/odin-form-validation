@@ -10,10 +10,10 @@ function getFormFields(form) {
 function showMessage(field, message) {
   const parentField = field.parentElement;
 
-  let span = parentField.querySelector(".errorBubble");
+  let span = parentField.querySelector(".errorMessage");
   if (!span) {
     span = document.createElement("span");
-    span.className = "errorBubble";
+    span.className = "errorMessage";
     parentField.appendChild(span);
   }
 

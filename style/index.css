@@ -33,13 +33,13 @@ form {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   gap: 1rem;
-
-  padding: 1rem;
 }
 
 .formField > label {
-  justify-self: end;
-  align-self: end;
+  place-self: end;
+}
+.formField > .errorMessage {
+  align-self: center;
 }
 
 .formField > [name] {
@@ -52,4 +52,8 @@ input[type="submit"] {
   grid-column-start: 2;
   background-color: white;
   border: thin solid black;
+}
+
+.errorMessage {
+  font-size: 80%;
 }
