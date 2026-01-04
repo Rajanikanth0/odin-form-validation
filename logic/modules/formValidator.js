@@ -3,7 +3,8 @@ import { showMessage, validators } from "./formUtil.js";
 const messengers = {
   "p-code": validators.postalCode,
   "email": validators.email,
-  "password": validators.password
+  "password": validators.password,
+  "c-password": validators.confirmPassword
 };
 
 // Enable/disable postal code based on country

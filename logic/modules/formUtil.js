@@ -101,6 +101,13 @@ const validators = {
     }
 
     return null; // valid
+  },
+
+  confirmPassword(value) {
+    // password field
+    const password = document.getElementById("password").value;
+    // match password 
+    return value === password ? null: "Password didn't match.";
   }
 };
 
