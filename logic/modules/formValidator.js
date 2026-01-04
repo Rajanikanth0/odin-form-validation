@@ -7,26 +7,29 @@ const messengers = {
   "c-password": validators.confirmPassword
 };
 
-// Enable/disable postal code based on country
-function togglePostalCodeField(isEnabled) {
-  const postalCode = document.getElementById("p-code");
-  if (postalCode) postalCode.disabled = !isEnabled;
+function getErrorMessage(field) {
+  return messengers[field.id]?.(field.value) ?? null;
 }
 
-function getErrorMessage(field) {
-  const validator = messengers[field.id];
-  return validator ? validator(field.value) : null;
+// Enable/disable the field
+function toggleField(id, isDisabled) {
+  const field = document.getElementById(id);
+  if (field) field.disabled = isDisabled;
 }
+
+const fieldDependencies = {
+  country: "p-code",
+  password: "c-password"
+};
 
 // Validate a single field
 function validateField(event) {
   const target = event.target || event;
-
-  if (target.id === "country") {
-    togglePostalCodeField( Boolean(target.value) );
-  }
-  
   const errorMessage = getErrorMessage(target) || "";
+
+  const dependentField = fieldDependencies[target.id];
+  if (dependentField) toggleField(dependentField, errorMessage);
+
   showMessage(target, errorMessage);
 }
 
