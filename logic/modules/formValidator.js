@@ -12,8 +12,12 @@ const fieldDependencies = {
   "password": "c-password"
 };
 
-function getErrorMessage(field) {
-  return fieldValidators[field.id]?.(field.value) ?? null;
+function getErrorMessage({ id, value, required }) {
+  if (required && !value) {
+    return "The field is required.";
+  }
+
+  return fieldValidators[id]?.(value) || null;
 }
 
 // Enable/disable the field
