@@ -21,10 +21,12 @@ function showMessage(field, message) {
 }
 
 const validators = {
-  postalCode(value) {
-    const trimmed = value.trim();
-    if (!value) return;
+  postalCode(value, required) {
+    if (!value) {
+      return required ? "The field is required!" : null;
+    }
 
+    const trimmed = value.trim();
     const [char, numbers] = trimmed.split('-');
 
     // Validate presence of char and numbers
@@ -43,10 +45,12 @@ const validators = {
     return null; // valid
   },
 
-  email(value) {
-    const trimmed = value.trim();
-    if (!value) return;
+  email(value, required) {
+    if (!value) {
+      return required ? "The field is required!" : null;
+    }
 
+    const trimmed = value.trim();
     const [username, domainPart] = trimmed.split('@');
 
     // Validate presence of username and domain
@@ -79,50 +83,66 @@ const validators = {
     return null; // valid
   },
 
-  password(value) {
-    const trimmed = value.trim();
-    if (!value) return;
+  password(value, required) {
+    // Validation rules
+    const rules = [
+      {
+        id: "lower",
+        test: (val) => /[a-z]/.test(val),
+        message: "Password must contain at least one lowercase letter."
+      },
+      {
+        id: "upper",
+        test: (val) => /[A-Z]/.test(val),
+        message: "Password must contain at least one uppercase letter."
+      },
+      {
+        id: "digit",
+        test: (val) => /\d/.test(val),
+        message: "Password must contain at least one digit."
+      },
+      {
+        id: "length",
+        test: (val) => val.length >= 6 && val.length <= 12,
+        message: "Password must be between 6 and 12 characters long."
+      }
+    ];
 
     const passwordChecks = document.querySelector(".passwordConstraints");
+
+    if (!value) {
+      rules.forEach(({id}) => {
+        const checkbox = passwordChecks.querySelector(`#${id}`);
+        if (checkbox) checkbox.checked = false;
+      });
+
+      return required ? "The field is required!": null;
+    };
+
+    const trimmed = value.trim();
+
     
     // No spaces allowed
     if (/\s/.test(trimmed)) {
       return "Password cannot contain spaces.";
     }
-    // Length check
-    if (trimmed.length < 6 || trimmed.length > 12) {
-      passwordChecks.querySelector("#length").checked = false;
-      return "Password must be between 6 and 12 characters long.";
-    } else {
-      passwordChecks.querySelector("#length").checked = true;
+
+    // Run through rules
+    for (const rule of rules) {
+      const isValid = rule.test(trimmed);
+      const checkbox = passwordChecks.querySelector(`#${rule.id}`);
+
+      if (checkbox) checkbox.checked = isValid;
+      if (!isValid) return rule.message;
     }
-    // at least one lowercase letter check
-    if (!/[a-z]/.test(trimmed)) {
-      passwordChecks.querySelector("#lower").checked = false;
-      return "Password must contain at least one lowercase letter.";
-    } else {
-      passwordChecks.querySelector("#lower").checked = true;
-    }
-    // at least one uppercase letter check
-    if (!/[A-Z]/.test(trimmed)) {
-      passwordChecks.querySelector("#upper").checked = false;
-      return "Password must contain at least one uppercase letter.";
-    } else {
-      passwordChecks.querySelector("#upper").checked = true;
-    }
-    // at least one digit check
-    if (!/\d/.test(trimmed)) {
-      passwordChecks.querySelector("#digit").checked = false;
-      return "Password must contain at least one digit.";
-    } else {
-      passwordChecks.querySelector("#digit").checked = true;
-    }
-    
+
     return null; // valid
   },
   
-  confirmPassword(value) {
-    if (!value) return;
+  confirmPassword(value, required) {
+    if (!value) {
+      return required ? "The field is required!" : null;
+    }
     
     // password field
     const password = document.getElementById("password").value;

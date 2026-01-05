@@ -13,11 +13,7 @@ const fieldDependencies = {
 };
 
 function getErrorMessage({ id, value, required }) {
-  if (required && !value) {
-    return "The field is required.";
-  }
-
-  return fieldValidators[id]?.(value) || null;
+  return fieldValidators[id]?.(value, required) || null;
 }
 
 // Enable/disable a field
