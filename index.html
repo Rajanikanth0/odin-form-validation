@@ -53,6 +53,25 @@
         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^ ]{6,12}$">
       </div>
 
+      <div class="formField passwordConstraints">
+        <fieldset>
+          <legend>Password Checks</legend>
+
+          <div class="constraint">
+            <input type="checkbox" name="length" id="length">
+            <label for="length">between 6 and 12 characters long</label>
+          </div>
+          <div class="constraint">
+            <input type="checkbox" name="capital" id="capital">
+            <label for="capital">at least one lowercase letter</label>
+          </div>
+          <div class="constraint">
+            <input type="checkbox" name="digit" id="digit">
+            <label for="digit">at least one digit</label>
+          </div>
+        </fieldset>
+      </div>
+
       <div class="formField cPasswordField">
         <label for="c-password">Confirm Password</label>
         <input
