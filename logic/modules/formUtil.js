@@ -23,6 +23,8 @@ function showMessage(field, message) {
 const validators = {
   postalCode(value) {
     const trimmed = value.trim();
+    if (!value) return;
+
     const [char, numbers] = trimmed.split('-');
 
     // Validate presence of char and numbers
@@ -43,6 +45,8 @@ const validators = {
 
   email(value) {
     const trimmed = value.trim();
+    if (!value) return;
+
     const [username, domainPart] = trimmed.split('@');
 
     // Validate presence of username and domain
@@ -77,6 +81,7 @@ const validators = {
 
   password(value) {
     const trimmed = value.trim();
+    if (!value) return;
 
     // No spaces allowed
     if (/\s/.test(trimmed)) {
@@ -103,6 +108,8 @@ const validators = {
   },
 
   confirmPassword(value) {
+    if (!value) return;
+
     // password field
     const password = document.getElementById("password").value;
     // match password 
