@@ -83,33 +83,47 @@ const validators = {
     const trimmed = value.trim();
     if (!value) return;
 
+    const passwordChecks = document.querySelector(".passwordConstraints");
+    
     // No spaces allowed
     if (/\s/.test(trimmed)) {
       return "Password cannot contain spaces.";
     }
     // Length check
     if (trimmed.length < 6 || trimmed.length > 12) {
+      passwordChecks.querySelector("#length").checked = false;
       return "Password must be between 6 and 12 characters long.";
+    } else {
+      passwordChecks.querySelector("#length").checked = true;
     }
     // at least one lowercase letter check
     if (!/[a-z]/.test(trimmed)) {
+      passwordChecks.querySelector("#lower").checked = false;
       return "Password must contain at least one lowercase letter.";
+    } else {
+      passwordChecks.querySelector("#lower").checked = true;
     }
     // at least one uppercase letter check
     if (!/[A-Z]/.test(trimmed)) {
+      passwordChecks.querySelector("#upper").checked = false;
       return "Password must contain at least one uppercase letter.";
+    } else {
+      passwordChecks.querySelector("#upper").checked = true;
     }
     // at least one digit check
     if (!/\d/.test(trimmed)) {
+      passwordChecks.querySelector("#digit").checked = false;
       return "Password must contain at least one digit.";
+    } else {
+      passwordChecks.querySelector("#digit").checked = true;
     }
-
+    
     return null; // valid
   },
-
+  
   confirmPassword(value) {
     if (!value) return;
-
+    
     // password field
     const password = document.getElementById("password").value;
     // match password 

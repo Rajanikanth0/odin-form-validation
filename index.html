@@ -54,7 +54,7 @@
       </div>
 
       <div class="formField passwordConstraints">
-        <fieldset>
+        <fieldset disabled>
           <legend>Password Checks</legend>
 
           <div class="constraint">
@@ -62,8 +62,12 @@
             <label for="length">between 6 and 12 characters long</label>
           </div>
           <div class="constraint">
-            <input type="checkbox" name="capital" id="capital">
-            <label for="capital">at least one lowercase letter</label>
+            <input type="checkbox" name="lower" id="lower">
+            <label for="lower">at least one lowercase letter</label>
+          </div>
+          <div class="constraint">
+            <input type="checkbox" name="upper" id="upper">
+            <label for="upper">at least one uppercase letter</label>
           </div>
           <div class="constraint">
             <input type="checkbox" name="digit" id="digit">
