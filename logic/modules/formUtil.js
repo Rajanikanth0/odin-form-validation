@@ -1,9 +1,6 @@
 // Get all form fields with a name attribute
 function getFormFields(form) {
-  return Array.from(
-    form.querySelectorAll("[name]"),
-    field => ({ id: field.id, element: field })
-  );
+  return Array.from( form.querySelectorAll("[name]") );
 }
 
 // Display error messages

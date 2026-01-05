@@ -60,11 +60,6 @@ input[type="submit"] {
 
 /* validators */
 
-.formField > [name]:invalid {
-  color: red;
-  border-color: red;
-}
-
 .passwordConstraints > fieldset {
   grid-column-start: 2;
   padding: 0.5rem;
