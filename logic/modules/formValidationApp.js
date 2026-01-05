@@ -2,8 +2,8 @@ import { getFormFields } from "./formUtil.js";
 import { validateField } from "./formValidator.js";
 
 // Attach listeners to fields
-function addFieldListeners(fields) {
-  fields.forEach(({id, element}) => {
+function addFieldListeners(fieldsObject) {
+  fieldsObject.forEach(({id, element}) => {
     const eventType = (id === "country") ? "change" : "input";
     element.addEventListener(eventType, validateField);
   });
@@ -12,9 +12,11 @@ function addFieldListeners(fields) {
 // Validate Form on submit
 function handleSubmit(event, fields) {
   const form = event.target;
+  // ignore disabled field validation
+  const enabledFields = fields.filter(({element}) => !element.disabled);
 
   if ( !form.checkValidity() ) {
-    fields.forEach(({ element }) => {
+    enabledFields.forEach(({ element }) => {
       validateField(element);
     });
     event.preventDefault();
@@ -29,10 +31,10 @@ function initializeForm() {
     return;
   }
 
-  const fields = getFormFields(form);
-  addFieldListeners(fields);
+  const fieldsObject = getFormFields(form);
+  addFieldListeners(fieldsObject);
 
-  form.addEventListener("submit", (e) => handleSubmit(e, fields));
+  form.addEventListener("submit", (e) => handleSubmit(e, fieldsObject));
 }
 
 export { initializeForm };
