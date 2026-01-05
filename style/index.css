@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-  width: 55rem;
+  width: 30rem;
   margin: 0 auto;
   padding: 1rem;
 
@@ -31,7 +31,7 @@ form {
 
 .formField {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr;
   gap: 1rem;
 }
 
@@ -55,6 +55,8 @@ input[type="submit"] {
 }
 
 .errorMessage {
+  padding-left: 0.5rem;
+  grid-column: 2;
   font-size: 80%;
 }
 
