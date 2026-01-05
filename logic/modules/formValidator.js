@@ -20,10 +20,12 @@ function getErrorMessage({ id, value, required }) {
   return fieldValidators[id]?.(value) || null;
 }
 
-// Enable/disable the field
-function toggleField(id, isDisabled) {
+// Enable/disable a field
+function toggleField(id, value, disabled) {
+  if (!value) return;
+
   const field = document.getElementById(id);
-  if (field) field.disabled = isDisabled;
+  if (field) field.disabled = disabled;
 }
 
 // Validate a single field
@@ -32,7 +34,7 @@ function validateField(event) {
   const errorMessage = getErrorMessage(target) || "";
 
   const dependentField = fieldDependencies[target.id];
-  if (dependentField) toggleField(dependentField, errorMessage);
+  if (dependentField) toggleField(dependentField, target.value, errorMessage);
 
   showMessage(target, errorMessage);
 }
