@@ -20,6 +20,10 @@ body {
   margin: 0 auto;
   padding: 1rem;
 
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
   box-shadow: 0 0 0.2rem gray;
 }
 
@@ -37,9 +41,6 @@ form {
 
 .formField > label {
   place-self: end;
-}
-.formField > .errorMessage {
-  align-self: center;
 }
 
 .formField > [name] {
@@ -81,4 +82,14 @@ input[type="submit"] {
   padding-left: 0.5rem;
   grid-column: 2;
   font-size: 80%;
+}
+.errorMessage::before {
+  content: "\203c";
+  margin-right: 0.2rem;
+}
+
+/* Hero Text */
+
+.hero {
+  border-bottom: thin solid black;
 }

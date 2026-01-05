@@ -21,8 +21,18 @@ function handleSubmit(event, fields) {
   }
 }
 
+function addRequiredIndicator() {
+  const requiredFields = document.querySelectorAll("input[required]");
+  requiredFields.forEach( field => {
+    const label = field.previousElementSibling;
+    label.textContent += ' *';
+  });
+}
+
 // Main initializer
 function initializeForm() {
+  addRequiredIndicator();
+
   const form = document.querySelector("form");
   if (!form) {
     console.warn("No form found on the page.");
