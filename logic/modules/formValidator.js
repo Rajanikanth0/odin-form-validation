@@ -12,28 +12,41 @@ const fieldDependencies = {
   "password": "c-password"
 };
 
-function getErrorMessage({ id, value, required }) {
-  return fieldValidators[id]?.(value, required) || null;
-}
-
 // Enable/disable a field
-function toggleField(id, value, disabled) {
-  if (!value) return;
-
+function toggleField(id, disabled) {
   const field = document.getElementById(id);
-  if (field) field.disabled = disabled;
+  if (field) {
+    field.disabled = disabled;
+  }
 }
 
 // Validate a single field
 function validateField(event) {
   const target = event.target || event;
-  const errorMessage = getErrorMessage(target) || "";
+  const { id, value, required } = target;
 
-  const dependentField = fieldDependencies[target.id];
-  if (dependentField) toggleField(dependentField, target.value, errorMessage);
+  const errorMessage = runValidator(id, value, required);
+
+  updateFieldState(target, errorMessage);
+  handleDependencies(id, value, errorMessage);
 
   showMessage(target, errorMessage);
   return errorMessage;
+}
+
+function runValidator(id, value, required) {
+  return fieldValidators[id]?.(value, required) || "";
+}
+
+function updateFieldState(target, errorMessage) {
+  target.classList.toggle("invalid", Boolean(errorMessage));
+}
+
+function handleDependencies(id, value, errorMessage) {
+  const dependentField = fieldDependencies[id];
+  if (dependentField && value) {
+    toggleField(dependentField, errorMessage);
+  }
 }
 
 export { validateField };

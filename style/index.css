@@ -54,12 +54,6 @@ input[type="submit"] {
   border: thin solid black;
 }
 
-.errorMessage {
-  padding-left: 0.5rem;
-  grid-column: 2;
-  font-size: 80%;
-}
-
 /* validators */
 
 .passwordConstraints > fieldset {
@@ -75,4 +69,16 @@ input[type="submit"] {
   gap: 0.5rem;
 
   padding: 0.2rem;
+}
+
+.formField > .invalid {
+  border-color: red;
+}
+
+.errorMessage {
+  color: red;
+
+  padding-left: 0.5rem;
+  grid-column: 2;
+  font-size: 80%;
 }

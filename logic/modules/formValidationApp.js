@@ -14,9 +14,6 @@ function handleSubmit(event, fields) {
   // Only validate enabled fields
   const enabledFields = fields.filter(field => !field.disabled);
   const invalidFields = enabledFields.filter(field => validateField(field));
-  
-  // add 'invalid' class to invalid fields
-  invalidFields.forEach(field => field.classList.add("invalid"));
 
   // Form is valid if every enabled field passes validation
   if (invalidFields.length !== 0) {
