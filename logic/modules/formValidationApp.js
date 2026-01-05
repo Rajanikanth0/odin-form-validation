@@ -11,14 +11,13 @@ function addFieldListeners(fieldsObject) {
 
 // Validate Form on submit
 function handleSubmit(event, fields) {
-  const form = event.target;
-  // ignore disabled field validation
-  const enabledFields = fields.filter(({element}) => !element.disabled);
+  // Only validate enabled fields
+  const enabledFields = fields.filter(({ element }) => !element.disabled);
 
-  if ( !form.checkValidity() ) {
-    enabledFields.forEach(({ element }) => {
-      validateField(element);
-    });
+  // Form is valid if every enabled field passes validation
+  const isFormValid = enabledFields.every(({ element }) => !validateField(element));
+
+  if (!isFormValid) {
     event.preventDefault();
   }
 }

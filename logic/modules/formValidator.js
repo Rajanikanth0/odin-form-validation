@@ -37,6 +37,7 @@ function validateField(event) {
   if (dependentField) toggleField(dependentField, target.value, errorMessage);
 
   showMessage(target, errorMessage);
+  return errorMessage;
 }
 
 export { validateField };
