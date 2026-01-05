@@ -83,10 +83,6 @@ input[type="submit"] {
   grid-column: 2;
   font-size: 80%;
 }
-.errorMessage::before {
-  content: "\203c";
-  margin-right: 0.2rem;
-}
 
 /* Hero Text */
 

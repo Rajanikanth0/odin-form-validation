@@ -16,9 +16,13 @@ function handleSubmit(event, fields) {
   const invalidFields = enabledFields.filter(field => validateField(field));
 
   // Form is valid if every enabled field passes validation
-  if (invalidFields.length !== 0) {
-    event.preventDefault();
+  if (invalidFields.length === 0) {
+    const container = document.querySelector(".container");
+    container.textContent = "The End";
+    container.style.cssText = "font-size: 5rem; text-align: center";
   }
+
+  event.preventDefault();
 }
 
 function addRequiredIndicator() {
